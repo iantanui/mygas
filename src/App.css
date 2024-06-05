@@ -11,9 +11,10 @@ body {
   min-height: 100vh;
 }
 
-.top-bar {
-  background-color: white;
-  color: black;
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
 }
 
 .App-logo {
