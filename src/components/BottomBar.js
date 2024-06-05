@@ -11,9 +11,11 @@ const BotttomBar = ({ value, onchange }) => {
     <BottomNavigation
       value={value}
       onChange={onchange}
+      showLabels
       style={{
         position: "fixed",
         bottom: 0,
+        padding: "8px",
         width: "100%",
         backgroundColor: "white",
         color: "black",
@@ -27,6 +29,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<GridViewOutlinedIcon />}
         style={{
           color: "black",
+          margin: "4px"
         }}
       />
       <BottomNavigationAction
@@ -35,6 +38,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<GasMeterOutlinedIcon />}
         style={{
           color: "black",
+          margin: "4px"
         }}
       />
       <BottomNavigationAction
@@ -43,6 +47,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<PublishedWithChangesOutlinedIcon />}
         style={{
           color: "black",
+          margin: "4px"
         }}
       />
       <BottomNavigationAction
@@ -51,6 +56,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<TuneOutlinedIcon/>}
         style={{
           color: "black",
+          margin: "4px"
         }}
       />
     </BottomNavigation>
