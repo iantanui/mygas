@@ -1,16 +1,22 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import GasMeterOutlinedIcon from "@mui/icons-material/GasMeterOutlined";
-import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
-import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
-
+import PublishedWithChangesOutlinedIcon from "@mui/icons-material/PublishedWithChangesOutlined";
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 
 const BotttomBar = ({ value, onchange }) => {
+  const navigate = useNavigate();
+
+  const handleChange = (event, newValue) => {
+    navigate(`/${newValue}`);
+  };
+
   return (
     <BottomNavigation
       value={value}
-      onChange={onchange}
+      onChange={handleChange}
       showLabels
       style={{
         position: "fixed",
@@ -29,7 +35,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<GridViewOutlinedIcon />}
         style={{
           color: "black",
-          margin: "4px"
+          margin: "4px",
         }}
       />
       <BottomNavigationAction
@@ -38,7 +44,7 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<GasMeterOutlinedIcon />}
         style={{
           color: "black",
-          margin: "4px"
+          margin: "4px",
         }}
       />
       <BottomNavigationAction
@@ -47,16 +53,16 @@ const BotttomBar = ({ value, onchange }) => {
         icon={<PublishedWithChangesOutlinedIcon />}
         style={{
           color: "black",
-          margin: "4px"
+          margin: "4px",
         }}
       />
       <BottomNavigationAction
         label="Management"
         value="management"
-        icon={<TuneOutlinedIcon/>}
+        icon={<TuneOutlinedIcon />}
         style={{
           color: "black",
-          margin: "4px"
+          margin: "4px",
         }}
       />
     </BottomNavigation>
