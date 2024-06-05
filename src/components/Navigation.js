@@ -21,13 +21,13 @@ const Navigation = () => {
       <TopBar />
 
       <Routes>
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/products" component={Products} />
-        <Route exact path="/refills" component={Refills} />
-        <Route exact path="/management" component={ManagementSystem} />
-        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/dashboard" component={<Dashboard />} />
+        <Route exact path="/products" component={<Products />} />
+        <Route exact path="/refills" component={<Refills />} />
+        <Route exact path="/management" component={<ManagementSystem />} />
+        <Route exact path="/" component={<Dashboard />} />
       </Routes>
-      
+
       <BotttomBar value={value} onchange={handleNavigationChange} />
     </>
 
