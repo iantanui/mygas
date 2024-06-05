@@ -1,9 +1,9 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import GridViewOutlined from "@mui/icons-material/Home";
-import ListIcon from "@mui/icons-material/List";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import GasMeterOutlinedIcon from "@mui/icons-material/GasMeterOutlined";
+import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 
 
 const BotttomBar = ({ value, onchange }) => {
@@ -24,7 +24,7 @@ const BotttomBar = ({ value, onchange }) => {
       <BottomNavigationAction
         label="Dashboard"
         value="dashboard"
-        icon={<GridViewOutlined />}
+        icon={<GridViewOutlinedIcon />}
         style={{
           color: "black",
         }}
@@ -32,7 +32,7 @@ const BotttomBar = ({ value, onchange }) => {
       <BottomNavigationAction
         label="Products"
         value="products"
-        icon={<ListIcon />}
+        icon={<GasMeterOutlinedIcon />}
         style={{
           color: "black",
         }}
@@ -40,7 +40,7 @@ const BotttomBar = ({ value, onchange }) => {
       <BottomNavigationAction
         label="Refills"
         value="refills"
-        icon={<LocalGasStationIcon />}
+        icon={<PublishedWithChangesOutlinedIcon />}
         style={{
           color: "black",
         }}
@@ -48,7 +48,7 @@ const BotttomBar = ({ value, onchange }) => {
       <BottomNavigationAction
         label="Management"
         value="management"
-        icon={<ManageAccountsIcon />}
+        icon={<TuneOutlinedIcon/>}
         style={{
           color: "black",
         }}
