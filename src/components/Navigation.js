@@ -27,6 +27,7 @@ const Navigation = () => {
         <Route exact path="/management" component={ManagementSystem} />
         <Route exact path="/" component={Dashboard} />
       </Routes>
+      
       <BotttomBar value={value} onchange={handleNavigationChange} />
     </>
 
