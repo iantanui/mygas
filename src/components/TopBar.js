@@ -4,7 +4,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const TopBar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ backgroundColor: "white", color: "black"}}>
       <Toolbar>
         <Typography variant="h5" style={{ flexGrow: 1 }}>
           myGas

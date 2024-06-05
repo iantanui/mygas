@@ -15,6 +15,7 @@ const BotttomBar = ({ value, onchange }) => {
         bottom: 0,
         width: "100%",
         backgroundColor: "white",
+        color: "black",
         boxShadow: "0px -2px 4px rgba(0, 0, 0, 0.1)",
         zIndex: 100,
       }}
