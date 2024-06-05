@@ -24,21 +24,33 @@ const BotttomBar = ({ value, onchange }) => {
         label="Dashboard"
         value="dashboard"
         icon={<HomeIcon />}
+        style={{
+          color: "black",
+        }}
       />
       <BottomNavigationAction
         label="Products"
         value="products"
         icon={<ListIcon />}
+        style={{
+          color: "black",
+        }}
       />
       <BottomNavigationAction
         label="Refills"
         value="refills"
         icon={<LocalGasStationIcon />}
+        style={{
+          color: "black",
+        }}
       />
       <BottomNavigationAction
         label="Management"
         value="management"
         icon={<ManageAccountsIcon />}
+        style={{
+          color: "black",
+        }}
       />
     </BottomNavigation>
   );
