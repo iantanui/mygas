@@ -17,4 +17,4 @@ const TopBar = () => {
   );
 };
 
-export default Toolbar;
+export default TopBar;

@@ -8,7 +8,7 @@ const Refills = () => {
 
             { /* Refills */ }
         </div>
-    )
-}
+    );
+};
 
 export default Refills;
