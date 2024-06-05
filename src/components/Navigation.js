@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import TopBar from "./TopBar";
 import Dashboard from "./Dashboard";
 import Products from "./Products";
@@ -17,7 +17,7 @@ const Navigation = () => {
   }
 
   return (
-    <Router>
+    <>
       <TopBar />
 
       <Routes>
@@ -28,8 +28,8 @@ const Navigation = () => {
         <Route exact path="/" component={Dashboard} />
       </Routes>
       <BotttomBar value={value} onchange={handleNavigationChange} />
-    </Router>
-    
+    </>
+
   );
 };
 
