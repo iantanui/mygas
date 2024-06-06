@@ -15,15 +15,22 @@ body {
   display: flex;
   flex-direction: column;
   padding-bottom: 4px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 15px;
+  font-weight: lighter;
 }
 
 .fixed-top {
-  padding: 8px;
+  padding: 16px;
   position: fixed;
   display: flex;
   justify-content: space-between;
   top: 0;
-  width: 100%;
+  width: 90%;
 }
 
 .fixed-bottom {
@@ -34,10 +41,6 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-
-.nav {
-  padding: 4px;
 }
 
 .link {
