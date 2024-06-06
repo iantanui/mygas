@@ -1,72 +1,27 @@
-import React from "react";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import GasMeterOutlinedIcon from "@mui/icons-material/GasMeterOutlined";
-import PublishedWithChangesOutlinedIcon from "@mui/icons-material/PublishedWithChangesOutlined";
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import React from 'react';
+import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const BotttomBar = ({ value, onchange }) => {
-  const navigate = useNavigate();
-
-  const handleChange = (event, newValue) => {
-    navigate(`/${newValue}`);
-  };
-
+const BottomBar = () => {
   return (
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
-      showLabels
-      style={{
-        position: "fixed",
-        bottom: 0,
-        padding: "8px",
-        width: "100%",
-        backgroundColor: "white",
-        color: "black",
-        boxShadow: "0px -2px 4px rgba(0, 0, 0, 0.1)",
-        zIndex: 100,
-      }}
-    >
-      <BottomNavigationAction
-        label="Dashboard"
-        value="dashboard"
-        icon={<GridViewOutlinedIcon />}
-        style={{
-          color: "black",
-          margin: "4px",
-        }}
-      />
-      <BottomNavigationAction
-        label="Products"
-        value="products"
-        icon={<GasMeterOutlinedIcon />}
-        style={{
-          color: "black",
-          margin: "4px",
-        }}
-      />
-      <BottomNavigationAction
-        label="Refills"
-        value="refills"
-        icon={<PublishedWithChangesOutlinedIcon />}
-        style={{
-          color: "black",
-          margin: "4px",
-        }}
-      />
-      <BottomNavigationAction
-        label="Management"
-        value="management"
-        icon={<TuneOutlinedIcon />}
-        style={{
-          color: "black",
-          margin: "4px",
-        }}
-      />
-    </BottomNavigation>
+    <Nav fill variant="tabs" defaultActiveKey="/dashboard" className="fixed-bottom">
+      <Nav.Item>
+        <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/products">Products</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/refills">Refills</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/management">Management</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/account">Account</Nav.Link>
+      </Nav.Item>
+    </Nav>
   );
 };
 
-export default BotttomBar;
+export default BottomBar;

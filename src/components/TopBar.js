@@ -1,24 +1,14 @@
-import React from "react";
-import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 
 const TopBar = () => {
   return (
-    <AppBar
-      position="static"
-      style={{ backgroundColor: "white", color: "black", boxShadow: "none" }}
-    >
-      <Toolbar style={{ justifyContent: "space-between" }}>
-        <div className="title">
-          <Typography variant="h4">myGas</Typography>
-          <Typography variant="p">Crystal management made easy</Typography>
-        </div>
-
-        <IconButton edge="end" color="inherit">
-          <AccountCircle />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <Navbar bg="dark" variant="dark" className="justify-content-between">
+      <Navbar.Brand href="/">myGas</Navbar.Brand>
+      <Nav>
+        <Nav.Link href="/account">Account</Nav.Link>
+      </Nav>
+    </Navbar>
   );
 };
 
