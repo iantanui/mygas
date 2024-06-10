@@ -1,30 +1,56 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Card, Button, Modal, ModalTitle } from "react-bootstrap";
+import "./ProductItem.css";
+import { ThreeDots } from "react-bootstrap-icons";
 
 const ProductItem = ({ product, handleShowModal }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleMore = () => {
+    setShowModal(!showModal);
+  };
   return (
-    <Card className="mb-3">
-      <Card.Header className="d-flex justify-content-between align-items-center">
-        <div className="rounded-circle bg-secondary text-white text-center" style={{ width: '30px', height: '30px' }}>
-          {product.id}
+    <Card className="product-card">
+      <div className="product-card-header">
+        <div className="product-id">{product.id}</div>
+        <div className="product-actions">
+          <ThreeDots
+            size={20}
+            onClick={handleToggleMore}
+            style={{ cursor: "pointer" }}
+          />
         </div>
-        <div>
-          <Button variant="outline-primary" size="sm" className="me-1" onClick={() => handleShowModal('Edit', product)}>Edit</Button>
-          <Button variant="outline-success" size="sm" className="me-1">View</Button>
-          <Button variant="outline-danger" size="sm">Delete</Button>
-        </div>
-      </Card.Header>
-      <Card.Body>
-        <Card.Text className="d-flex justify-content-between">
-          <span>Product Name:</span> <span>{product.name}</span>
-        </Card.Text>
-        <Card.Text className="d-flex justify-content-between">
-          <span>Quantity:</span> <span>{product.quantity}</span>
-        </Card.Text>
-        <Card.Text className="d-flex justify-content-between">
-          <span>Price:</span> <span>${product.price}</span>
-        </Card.Text>
-      </Card.Body>
+      </div>
+
+      <div className="divider" />
+
+      <div className="product-info">
+        <h5>{product.name}</h5>
+        <p>{product.quantity}</p>
+        <p>${product.price}</p>
+      </div>
+
+      <Modal show={showModal} onHide={handleToggleMore} centered>
+        <Modal.Header closeButton>
+          <ModalTitle>Product</ModalTitle>
+        </Modal.Header>
+        <Modal.Body>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            className="me-1"
+            onClick={() => handleShowModal("Edit", product)}
+          >
+            Edit
+          </Button>
+          <Button variant="outline-success" size="sm" className="me-1">
+            View
+          </Button>
+          <Button variant="outline-danger" size="sm">
+            Delete
+          </Button>
+        </Modal.Body>
+      </Modal>
     </Card>
   );
 };

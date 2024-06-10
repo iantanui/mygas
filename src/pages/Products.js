@@ -6,6 +6,7 @@ import ProductDialog from "../components/products/ProductDialog";
 
 const initialProducts = [
   { id: 1, name: "Product 1", quantity: 10, price: 100 },
+  { id: 2, name: "Product 2", quantity: 12, price: 110 },
 ];
 
 const Products = () => {
@@ -51,26 +52,24 @@ const Products = () => {
 
   return (
     <Container className="mt-5">
-      <Row>
+      <Row className="mb-4">
         <Col>
           <h1>Products</h1>
           <p>List of products</p>
         </Col>
-      </Row>
-      <Row className="my-3">
-        <Col>
+
+        <Col className="text-end">
           <Calendar size={24} />
         </Col>
       </Row>
-
-      <Row className="my-3">
+      
+      <Row>
         <Col>
           <Button variant="primary" onClick={() => handleShowModal("Add")}>
             Add Product
           </Button>
         </Col>
       </Row>
-
       <Row className="my-3">
         <Col>
           {products.map((product) => (
@@ -82,7 +81,6 @@ const Products = () => {
           ))}
         </Col>
       </Row>
-
       <ProductDialog
         show={showModal}
         handleClose={handleCloseModal}
