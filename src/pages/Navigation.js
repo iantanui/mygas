@@ -13,11 +13,11 @@ const Navigation = () => {
       <TopBar />
       <div className="content mt-5">
         <Routes>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/products" component={Products} />
-          <Route path="/refills" component={Refills} />
-          <Route path="/management" component={Management} />
-          <Route path="/" component={Dashboard} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/refills" element={<Refills />} />
+          <Route path="/management" element={<Management />} />
+          <Route path="/" element={<Dashboard />} />
         </Routes>
       </div>
       <BottomBar />
