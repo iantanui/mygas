@@ -11,7 +11,7 @@ const Navigation = () => {
   return (
     <Router>
       <TopBar />
-      <div className="content mt-5">
+      <div className="content">
         <Routes>
           <Route path="/dashboard" element={<DashboardScreen />} />
           <Route path="/products" element={<ProductsScreen />} />
