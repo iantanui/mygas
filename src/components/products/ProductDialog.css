@@ -36,13 +36,14 @@
   padding: 16px;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .product-dialog-button button {
   background-color: black;
   font-size: 16px;
   color: white;
-  width: 80px;
+  width: 100px;
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
