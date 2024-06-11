@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ProductItem from "../components/products/ProductItem";
 import ProductDialog from "../components/products/ProductDialog";
-import { fetchProducts, addProduct, updateProduct, deleteProduct } from "../api";
+import {
+  fetchProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+} from "../api";
 
 function ProductsScreen() {
   const [products, setProducts] = useState([]);
@@ -14,7 +19,7 @@ function ProductsScreen() {
 
   const handleSave = (product) => {
     if (currentProduct) {
-      updatedProduct(product).then(() => {
+      updateProduct(product).then(() => {
         setProducts(products.map((p) => (p.id === product.id ? product : p)));
       });
     } else {
@@ -29,28 +34,29 @@ function ProductsScreen() {
   return (
     <div>
       <button onClick={() => setShowDialog(true)}>Add Product</button>
-        {products.map(product => (
+      {products.map((product) => (
+        <ProductItem
           key={product.id}
           product={product}
           onEdit={() => {
-          setCurrentProduct(product);
-          setShowDialog(true);
+            setCurrentProduct(product);
+            setShowDialog(true);
           }}
           onDelete={() => {
             deleteProduct(product.id).then(() => {
-              setProducts(products.filter(p => p.id !== product.id));
+              setProducts(products.filter((p) => p.id !== product.id));
             });
           }}
-          />
-        ))}
-        {showDialog && (
-          <ProductDialog
+        />
+      ))}
+      {showDialog && (
+        <ProductDialog
           product={currentProduct}
           onDismiss={() => setShowDialog(false)}
           onSave={handleSave}
-          />
-        )}
-        </div>
+        />
+      )}
+    </div>
   );
 }
 
