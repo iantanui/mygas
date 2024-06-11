@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ProductItem from "../components/products/ProductItem";
-import ProductDialog from "../components/products/ProductDialog";
-import {
-  fetchProducts,
-  addProduct,
-  updateProduct,
-  deleteProduct,
-} from "../api";
+import React, { useState, useEffect } from 'react';
+import ProductDialog from '../components/products/ProductDialog';
+import ProductItem from '../components/products/ProductItem';
+import { fetchProducts, addProduct, updateProduct, deleteProduct } from '../api';
 
-function ProductsScreen() {
+function ProductScreen() {
   const [products, setProducts] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -20,7 +15,7 @@ function ProductsScreen() {
   const handleSave = (product) => {
     if (currentProduct) {
       updateProduct(product).then(() => {
-        setProducts(products.map((p) => (p.id === product.id ? product : p)));
+        setProducts(products.map(p => p.id === product.id ? product : p));
       });
     } else {
       addProduct(product).then((newProduct) => {
@@ -33,8 +28,9 @@ function ProductsScreen() {
 
   return (
     <div>
+      <h1>Products</h1>
       <button onClick={() => setShowDialog(true)}>Add Product</button>
-      {products.map((product) => (
+      {products && products.map(product => (
         <ProductItem
           key={product.id}
           product={product}
@@ -44,7 +40,7 @@ function ProductsScreen() {
           }}
           onDelete={() => {
             deleteProduct(product.id).then(() => {
-              setProducts(products.filter((p) => p.id !== product.id));
+              setProducts(products.filter(p => p.id !== product.id));
             });
           }}
         />
@@ -60,4 +56,4 @@ function ProductsScreen() {
   );
 }
 
-export default ProductsScreen;
+export default ProductScreen;

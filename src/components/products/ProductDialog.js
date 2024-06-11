@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ProductDialog.css";
 
 function ProductDialog({ product, onDismiss, onSave }) {
   const [name, setName] = useState(product ? product.name : "");
@@ -10,7 +11,7 @@ function ProductDialog({ product, onDismiss, onSave }) {
   };
 
   return (
-    <div className="dialog">
+    <div className="product-dialog">
       <h2>{product ? "Edit Product" : "Add Product"}</h2>
       <label>
         Name:
@@ -36,8 +37,10 @@ function ProductDialog({ product, onDismiss, onSave }) {
           onChange={(e) => setPrice(Number(e.target.value))}
         />
       </label>
-      <button onClick={handleSubmit}>Save</button>
-      <button onClick={onDismiss}>Cancel</button>
+      <div className="product-dialog-button">
+        <button onClick={handleSubmit}>Save</button>
+        <button onClick={onDismiss}>Cancel</button>
+      </div>
     </div>
   );
 }
