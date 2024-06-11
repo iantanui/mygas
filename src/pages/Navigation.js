@@ -7,7 +7,7 @@ import ProductsScreen from "./ProductsScreen";
 import RefillsScreen from "./RefillsScreen";
 import ManagementScreen from "./ManagementScreen";
 
-const Navigation = () => {
+function Navigation () {
   return (
     <Router>
       <TopBar />
