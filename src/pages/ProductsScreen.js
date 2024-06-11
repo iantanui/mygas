@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { Calendar } from "react-bootstrap-icons";
 import ProductItem from "../components/products/ProductItem";
 import ProductDialog from "../components/products/ProductDialog";
 
-const initialProducts = [
-  { id: 1, name: "Product 1", quantity: 10, price: 100 },
-  { id: 2, name: "Product 2", quantity: 12, price: 110 },
-];
-
-const ProductsScreen = () => {
-  const [products, setProducts] = useState(initialProducts);
+function ProductsScreen () {
+  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
   const [currentProduct, setCurrentProduct] = useState({
