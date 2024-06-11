@@ -9,7 +9,7 @@ const initialProducts = [
   { id: 2, name: "Product 2", quantity: 12, price: 110 },
 ];
 
-const Products = () => {
+const ProductsScreen = () => {
   const [products, setProducts] = useState(initialProducts);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
@@ -100,4 +100,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsScreen;
