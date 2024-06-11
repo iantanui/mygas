@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 
-const TopBar = () => {
+function TopBar () {
   return (
     <div className="top-app-bar">
       <div className="title">

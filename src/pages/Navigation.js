@@ -6,6 +6,7 @@ import DashboardScreen from "./DashboardScreen";
 import ProductsScreen from "./ProductsScreen";
 import RefillsScreen from "./RefillsScreen";
 import ManagementScreen from "./ManagementScreen";
+import '../App.css'
 
 function Navigation () {
   return (
