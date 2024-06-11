@@ -55,31 +55,19 @@ font-size: 15px;
   text-decoration: underline;
 }
 
-.fixed-top {
-  padding: 16px;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  top: 0;
-  width: 90%;
+.products-screen {
+  position: relative;
 }
 
-.fixed-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 8px;
-  position: fixed;
-  bottom: 0;
+.products-screen .btn {
+  background-color: black;
+  color: white;
+  position: absolute;
+  top: 50px;
   width: 100%;
-}
-
-.link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: black;
-  padding: 4px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 .App-logo {

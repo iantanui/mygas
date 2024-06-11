@@ -27,9 +27,9 @@ function ProductScreen() {
   };
 
   return (
-    <div>
+    <div className="products-screen">
       <h1>Products</h1>
-      <button onClick={() => setShowDialog(true)}>Add Product</button>
+      <button onClick={() => setShowDialog(true)} className="btn">Add Product</button>
       {products && products.map(product => (
         <ProductItem
           key={product.id}
