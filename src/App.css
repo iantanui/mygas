@@ -13,17 +13,25 @@ body {
   height: 100vh;
 }
 
-.title {
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.top-app-bar {
   display: flex;
-  flex-direction: column;
-  padding-bottom: 4px;
-  font-size: 35px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title h2{
+  padding: 0;
+  font-size: 24px;
   font-weight: bold;
 }
 
-.sub-title {
-  font-size: 15px;
-  font-weight: lighter;
+.title p {
+font-size: 15px;
 }
 
 .fixed-top {
