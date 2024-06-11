@@ -14,7 +14,7 @@ function ProductDialog({ product, onDismiss, onSave }) {
     <div className="product-dialog">
       <h2>{product ? "Edit Product" : "Add Product"}</h2>
       <label>
-        Name:
+        Name
         <input
           type="text"
           value={name}
@@ -22,7 +22,7 @@ function ProductDialog({ product, onDismiss, onSave }) {
         />
       </label>
       <label>
-        Quantity:{" "}
+        Quantity{" "}
         <input
           type="number"
           value={quantity}
@@ -30,7 +30,7 @@ function ProductDialog({ product, onDismiss, onSave }) {
         />
       </label>
       <label>
-        Price:
+        Price
         <input
           type="number"
           value={price}
