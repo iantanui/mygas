@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductItem from "../components/products/ProductItem";
 import ProductDialog from "../components/products/ProductDialog";
+import { fetchProducts, addProduct, updateProduct, deleteProduct } from "../api";
 
 function ProductsScreen() {
   const [products, setProducts] = useState([]);
