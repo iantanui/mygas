@@ -1,47 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDialog.css";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 
-function ProductDialog({ product, onDismiss, onSave }) {
-  const [name, setName] = useState(product ? product.name : "");
-  const [quantity, setQuantity] = useState(product ? product.quantity : 0);
-  const [price, setPrice] = useState(product ? product.price : 0.0);
+function ProductDialog({ open, onClose, onSave, product }) {
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
 
-  const handleSubmit = () => {
-    onSave({ id: product?.id, name, quantity, price });
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setQuantity(product.quantity);
+      setPrice(product.price);
+    } else {
+      setName("");
+      setQuantity("");
+      setPrice("");
+    }
+  }, [product]);
+
+  const handleSave = () => {
+    onSave(name, parseInt(quantity), parseInt(price));
   };
 
   return (
-    <div className="product-dialog">
-      <h2>{product ? "Edit Product" : "Add Product"}</h2>
-      <label>
-        Name
-        <input
-          type="text"
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>{product ? "Edit Product" : "Add Product"}</DialogTitle>
+      <DialogContent>
+        <TextField
+          margin="dense"
+          label="Product Name"
+          fullWidth
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-      </label>
-      <label>
-        Quantity{" "}
-        <input
+        <TextField
+          margin="dense"
+          label="Quantity"
           type="number"
+          fullWidth
           value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
+          onChange={(e) => setQuantity(e.target.value)}
         />
-      </label>
-      <label>
-        Price
-        <input
+        <TextField
+          margin="dense"
+          label="Price"
           type="number"
+          fullWidth
           value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
+          onChange={(e) => setPrice(e.target.value)}
         />
-      </label>
-      <div className="product-dialog-button">
-        <button onClick={handleSubmit}>Save</button>
-        <button onClick={onDismiss}>Cancel</button>
-      </div>
-    </div>
+      </DialogContent>
+
+      <DialogActions>
+        <Button onClick={onClose} color="black">Cancel</Button>
+        <Button onClick={handleSave} color="black">Save</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
 
