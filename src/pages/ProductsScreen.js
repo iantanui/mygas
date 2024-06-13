@@ -29,6 +29,12 @@ function ProductScreen() {
           variant="contained"
           color="primary"
           fullWidth
+          style={{
+            backgroundColor: "black",
+            color: "white",
+            marginTop: "1rem",
+            marginBottom: "1rem",
+          }}
           onClick={() => setShowDialog(true)}
         >
           Add Product
