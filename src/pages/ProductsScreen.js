@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductDialog from "../components/products/ProductDialog";
 import ProductItem from "../components/products/ProductItem";
 import { useProducts } from "../components/products/ProductContext";
@@ -53,6 +53,13 @@ function ProductScreen() {
               </React.Fragment>
             ))}
         </List>
+
+        <ProductDialog
+          open={showDialog}
+          onClose={() => setShowDialog(false)}
+          onSave={handleSave}
+          product={currentProduct}
+        />
       </Container>
     </div>
   );
