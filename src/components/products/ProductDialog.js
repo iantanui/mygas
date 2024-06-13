@@ -53,8 +53,8 @@ function ProductDialog({ open, onClose, onSave, product }) {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose} color="black">Cancel</Button>
-        <Button onClick={handleSave} color="black">Save</Button>
+        <Button onClick={onClose} color="primary">Cancel</Button>
+        <Button onClick={handleSave} color="primary">Save</Button>
       </DialogActions>
     </Dialog>
   );

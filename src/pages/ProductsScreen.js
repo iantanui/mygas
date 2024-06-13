@@ -27,7 +27,7 @@ function ProductScreen() {
 
         <Button
           variant="contained"
-          color="black"
+          color="primary"
           fullWidth
           onClick={() => setShowDialog(true)}
         >
