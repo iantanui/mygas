@@ -20,9 +20,10 @@ function ProductScreen() {
   };
 
   return (
-    <div className="products-screen">
       <Container>
-        <Typography variant="h6">Gas Cylinders</Typography>
+        <Typography variant="h6" style={{ textAlign: 'left' }}>
+          Gas Cylinders
+        </Typography>
         <Typography variant="body2">List of gas</Typography>
 
         <Button
@@ -67,7 +68,6 @@ function ProductScreen() {
           product={currentProduct}
         />
       </Container>
-    </div>
   );
 }
 
