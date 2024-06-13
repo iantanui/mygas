@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./ProductDialog.css";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 
 function ProductDialog({ open, onClose, onSave, product }) {
   const [name, setName] = useState("");
@@ -53,8 +60,22 @@ function ProductDialog({ open, onClose, onSave, product }) {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose} color="primary">Cancel</Button>
-        <Button onClick={handleSave} color="primary">Save</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
+          onClick={handleSave}
+        >
+          Save
+        </Button>
       </DialogActions>
     </Dialog>
   );
