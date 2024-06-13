@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import ProductDialog from '../components/products/ProductDialog';
-import ProductItem from '../components/products/ProductItem';
-import { fetchProducts, addProduct, updateProduct, deleteProduct } from '../api';
+import React, { useState, useEffect } from "react";
+import ProductDialog from "../components/products/ProductDialog";
+import ProductItem from "../components/products/ProductItem";
+import { useProducts } from "../components/products/ProductContext";
+import { Button, Container, Divider, List, Typography } from "@mui/material";
 
 function ProductScreen() {
-  const [products, setProducts] = useState([]);
+  const { products, addProduct, deleteProduct, updateProduct } = useProducts();
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
-  useEffect(() => {
-    fetchProducts().then(setProducts);
-  }, []);
-
-  const handleSave = (product) => {
+  const handleSave = (name, quantity, price) => {
     if (currentProduct) {
-      updateProduct(product).then(() => {
-        setProducts(products.map(p => p.id === product.id ? product : p));
-      });
+      updateProduct(currentProduct.id, name, quantity, price);
     } else {
-      addProduct(product).then((newProduct) => {
-        setProducts([...products, newProduct]);
-      });
+      addProduct(name, quantity, price);
     }
     setShowDialog(false);
     setCurrentProduct(null);
@@ -28,30 +21,39 @@ function ProductScreen() {
 
   return (
     <div className="products-screen">
-      <h1>Products</h1>
-      <button onClick={() => setShowDialog(true)} className="btn">Add Product</button>
-      {products && products.map(product => (
-        <ProductItem
-          key={product.id}
-          product={product}
-          onEdit={() => {
-            setCurrentProduct(product);
-            setShowDialog(true);
-          }}
-          onDelete={() => {
-            deleteProduct(product.id).then(() => {
-              setProducts(products.filter(p => p.id !== product.id));
-            });
-          }}
-        />
-      ))}
-      {showDialog && (
-        <ProductDialog
-          product={currentProduct}
-          onDismiss={() => setShowDialog(false)}
-          onSave={handleSave}
-        />
-      )}
+      <Container>
+        <Typography variant="h6">Gas Cylinders</Typography>
+        <Typography variant="body2">List of gas</Typography>
+
+        <Button
+          variant="contained"
+          color="black"
+          fullWidth
+          onClick={() => setShowDialog(true)}
+        >
+          Add Product
+        </Button>
+
+        <List>
+          {products
+            .slice()
+            .reverse()
+            .map((product, index) => (
+              <React.Fragment key={product.id}>
+                <ProductItem
+                  index={index}
+                  product={product}
+                  onEdit={() => {
+                    setCurrentProduct(product);
+                    setShowDialog(true);
+                  }}
+                  onDelete={() => deleteProduct(product.id)}
+                />
+                <Divider />
+              </React.Fragment>
+            ))}
+        </List>
+      </Container>
     </div>
   );
 }
