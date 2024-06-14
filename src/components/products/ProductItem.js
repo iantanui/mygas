@@ -22,12 +22,49 @@ function ProductItem({ index, product, onEdit, onDelete }) {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Typography>{index + 1}</Typography>
-        <IconButton onClick={handleMenuOpen}>
-          <MoreVert />
-        </IconButton>
+    <Card
+      variant="outlined"
+      style={{
+        marginBottom: "10px",
+        position: "relative",
+        borderRadius: " 10px",
+      }}
+    >
+      <CardContent
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          padding: "8px",
+        }}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            paddingBottom: "4px",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Typography
+            style={{
+              padding: "1px 5px",
+              borderRadius: "50%",
+              border: "1px solid gray",
+              backgroundColor: "white",
+              color: "black",
+              textAlign: "center",
+            }}
+          >
+            {index + 1}
+          </Typography>
+
+          <IconButton onClick={handleMenuOpen}>
+            <MoreVert />
+          </IconButton>
+
+        </div>
 
         <Menu
           anchorEl={anchorEl}
@@ -52,11 +89,41 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           </MenuItem>
         </Menu>
 
-        <Divider />
+        <Divider style={{ width: "95%", alignSelf: "center" }} />
 
-        <Typography>Name: {product.name}</Typography>
-        <Typography>Quantity: {product.quantity}</Typography>
-        <Typography>Price: {product.price}</Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Name</span>
+          <span>{product.name}</span>
+        </Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Quantity</span>
+          <span>{product.quantity}</span>
+        </Typography>
+        <Typography
+          style={{
+            paddingLeft: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Price</span>
+          <span>{product.price}</span>
+        </Typography>
       </CardContent>
     </Card>
   );
