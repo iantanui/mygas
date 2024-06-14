@@ -78,10 +78,10 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           <span>Price</span>
           <span>{refill.price}</span>
         </Typography>
-        
+
       </CardContent>
     </Card>
   );
-}
+};
 
 export default RefillItem;
