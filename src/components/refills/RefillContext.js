@@ -6,7 +6,7 @@ export const useRefills = () => {
   return useContext(RefillContext);
 };
 
-const RefillProvider = ({ children }) => {
+export const RefillProvider = ({ children }) => {
   const [refills, setRefills] = useState([]);
 
   const addRefill = (name, quantity, price) => {
