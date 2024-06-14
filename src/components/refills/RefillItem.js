@@ -2,6 +2,7 @@ import { MoreVert } from "@mui/icons-material";
 import {
   Card,
   CardContent,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
@@ -21,10 +22,43 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <div>
-          <div>{index + 1}</div>
+    <Card
+      variant="outlined"
+      style={{
+        marginBottom: "10px",
+        position: "relative",
+        borderRadius: " 10px",
+      }}
+    >
+      <CardContent
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          padding: "8px",
+        }}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            paddingBottom: "4px",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              padding: "1px 5px",
+              borderRadius: "50%",
+              border: "1px solid gray",
+              backgroundColor: "white",
+              color: "black",
+              textAlign: "center",
+            }}
+          >
+            {index + 1}
+          </div>
 
           <IconButton onClick={handleMenuOpen}>
             <MoreVert />
@@ -64,24 +98,46 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           </MenuItem>
         </Menu>
 
-        <Typography>
+        <Divider style={{ width: "95%", alignSelf: "center" }} />
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Name</span>
           <span>{refill.name}</span>
         </Typography>
 
-        <Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Quantity</span>
           <span>{refill.quantity}</span>
         </Typography>
 
-        <Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
           <span>Price</span>
           <span>{refill.price}</span>
         </Typography>
-
       </CardContent>
     </Card>
   );
-};
+}
 
 export default RefillItem;

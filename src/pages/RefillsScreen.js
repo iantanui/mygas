@@ -24,13 +24,26 @@ const Refills = () => {
       <Typography>Gas Refills</Typography>
       <Typography>List of refills</Typography>
 
-      <Button>Add Refill</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginTop: "1rem",
+          marginBottom: "1rem",
+        }}
+        onClick={() => setShowDialog(true)}
+      >
+        Add Refill
+      </Button>
 
       <List>
         {refills
           .slice()
           .reverse()
-          .map((refill, index) => {
+          .map((refill, index) => (
             <React.Fragment key={refill.id}>
               <RefillItem
                 index={index}
@@ -42,8 +55,8 @@ const Refills = () => {
                 onDelete={() => deleteRefill(refill.id)}
               />
               <Divider />
-            </React.Fragment>;
-          })}
+            </React.Fragment>
+          ))}
       </List>
 
       <RefillDialog

@@ -59,10 +59,24 @@ function RefillDialog({ open, onClose, onSave, refill }) {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+        
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
+          onClick={handleSave}
+        >
+          Save
+        </Button>
       </DialogActions>
-
     </Dialog>
   );
 }
