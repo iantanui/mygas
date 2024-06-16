@@ -35,7 +35,8 @@ export const RefillProvider = ({ children }) => {
 
   return (
     <RefillContext.Provider
-      value={{ refills, addRefill, deleteRefill, updateRefill }}>
+      value={{ refills, addRefill, deleteRefill, updateRefill }}
+    >
       {children}
     </RefillContext.Provider>
   );

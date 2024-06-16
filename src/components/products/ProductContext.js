@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
 
 const ProductContext = createContext();
 
-export const useProducts = () => useContext(ProductContext);
+export const useProducts = () => {
+  return useContext(ProductContext);
+};
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const addProduct = (name, quantity, price) => {
     const newProduct = {
-      id: uuidV4(),
+      id: Date.now().toString(),
       name,
       quantity,
       price,
@@ -42,3 +43,5 @@ export const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   );
 };
+
+export default ProductProvider;
