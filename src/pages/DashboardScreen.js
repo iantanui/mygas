@@ -33,9 +33,9 @@ const Dashboard = () => {
         <Grid item xs={12} sm={4}>
           <DashboardCard
             icon={<Menu />}
-            label="Total Sales"
+            label="Total Refills"
             value={totalRefills}
-            bottom="Sales made today"
+            bottom="Refills made today"
           />
         </Grid>
         <Grid item xs={12} sm={4}>
