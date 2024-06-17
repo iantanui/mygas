@@ -1,11 +1,17 @@
-import React from 'react';
+import { Container, Grid, Typography } from "@mui/material";
+import React from "react";
 
 const Dashboard = () => {
   return (
-    <div className="container">
-      <h1>Dashboard</h1>
-      {/* Add dashboard content here */}
-    </div>
+    <Container>
+      <Typography>Dashboard</Typography>
+
+      <Grid>
+        <Grid>
+          
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
