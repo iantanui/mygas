@@ -20,54 +20,54 @@ function ProductScreen() {
   };
 
   return (
-      <Container>
-        <Typography variant="h6" style={{ textAlign: 'left' }}>
-          Gas Cylinders
-        </Typography>
-        <Typography variant="body2">List of gas</Typography>
+    <Container style={{ padding: "8px" }}>
+      <Typography variant="h6" style={{ textAlign: "left" }}>
+        Gas Cylinders
+      </Typography>
+      <Typography variant="body2">List of gas</Typography>
 
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          style={{
-            backgroundColor: "black",
-            color: "white",
-            marginTop: "1rem",
-            marginBottom: "1rem",
-          }}
-          onClick={() => setShowDialog(true)}
-        >
-          Add Product
-        </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginTop: "1rem",
+          marginBottom: "1rem",
+        }}
+        onClick={() => setShowDialog(true)}
+      >
+        Add Product
+      </Button>
 
-        <List>
-          {products
-            .slice()
-            .reverse()
-            .map((product, index) => (
-              <React.Fragment key={product.id}>
-                <ProductItem
-                  index={index}
-                  product={product}
-                  onEdit={() => {
-                    setCurrentProduct(product);
-                    setShowDialog(true);
-                  }}
-                  onDelete={() => deleteProduct(product.id)}
-                />
-                <Divider />
-              </React.Fragment>
-            ))}
-        </List>
+      <List>
+        {products
+          .slice()
+          .reverse()
+          .map((product, index) => (
+            <React.Fragment key={product.id}>
+              <ProductItem
+                index={index}
+                product={product}
+                onEdit={() => {
+                  setCurrentProduct(product);
+                  setShowDialog(true);
+                }}
+                onDelete={() => deleteProduct(product.id)}
+              />
+              <Divider />
+            </React.Fragment>
+          ))}
+      </List>
 
-        <ProductDialog
-          open={showDialog}
-          onClose={() => setShowDialog(false)}
-          onSave={handleSave}
-          product={currentProduct}
-        />
-      </Container>
+      <ProductDialog
+        open={showDialog}
+        onClose={() => setShowDialog(false)}
+        onSave={handleSave}
+        product={currentProduct}
+      />
+    </Container>
   );
 }
 

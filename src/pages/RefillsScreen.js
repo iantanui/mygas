@@ -20,7 +20,7 @@ const Refills = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ padding: "8px" }}>
       <Typography>Gas Refills</Typography>
       <Typography>List of refills</Typography>
 
