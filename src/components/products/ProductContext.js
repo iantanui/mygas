@@ -1,12 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 
-const ProductContext = createContext();
+export const ProductContext = createContext();
 
-export const useProducts = () => {
-  return useContext(ProductContext);
-};
-
-export const ProductProvider = ({ children }) => {
+const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const addProduct = (name, quantity, price) => {
@@ -43,5 +39,7 @@ export const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   );
 };
+
+export const useProducts = () => useContext(ProductContext);
 
 export default ProductProvider;

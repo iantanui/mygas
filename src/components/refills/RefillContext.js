@@ -1,12 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 
-const RefillContext = createContext();
+export const RefillContext = createContext();
 
-export const useRefills = () => {
-  return useContext(RefillContext);
-};
-
-export const RefillProvider = ({ children }) => {
+const RefillProvider = ({ children }) => {
   const [refills, setRefills] = useState([]);
 
   const addRefill = (name, quantity, price) => {
@@ -15,6 +11,7 @@ export const RefillProvider = ({ children }) => {
       name,
       quantity,
       price,
+      date: new Date().toISOString(),
     };
     setRefills((prevRefills) => [...prevRefills, newRefill]);
   };
@@ -42,4 +39,6 @@ export const RefillProvider = ({ children }) => {
   );
 };
 
-export default RefillContext;
+export const useRefills = () => useContext(RefillContext);
+
+export default RefillProvider;
