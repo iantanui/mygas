@@ -110,7 +110,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           }}
         >
           <span>Gas type</span>
-          <span>{product.selectedGasType}</span>
+          <span>{product.selectedGasType} </span>
         </Typography>
         <Typography
           style={{
