@@ -63,7 +63,6 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           <IconButton onClick={handleMenuOpen}>
             <MoreVert />
           </IconButton>
-
         </div>
 
         <Menu
@@ -101,6 +100,17 @@ function ProductItem({ index, product, onEdit, onDelete }) {
         >
           <span>Name</span>
           <span>{product.name}</span>
+        </Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Gas type</span>
+          <span>{product.selectedGasType}</span>
         </Typography>
         <Typography
           style={{
