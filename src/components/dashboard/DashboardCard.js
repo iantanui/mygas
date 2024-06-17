@@ -3,16 +3,22 @@ import React from "react";
 
 const DashboardCard = ({ icon, label, value, bottom }) => {
   return (
-    <Card>
+    <Card style={{ height: "120px", backgroundColor: "white" }} elevation={8}>
       <CardContent>
-        <Box>
-          <Typography>{label}</Typography>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Typography variant="body2" color="black">
+            {label}
+          </Typography>
           {icon}
         </Box>
-        <Box>
-          <Typography>{value}</Typography>
+        <Box display="flex" justifyContent="center" alignItems="center" my={2}>
+          <Typography variant="h6" color="black" fontWeight="bold">
+            {value}
+          </Typography>
         </Box>
-        <Typography>{bottom}</Typography>
+        <Typography variant="caption" color="lightgray" align="center">
+          {bottom}
+        </Typography>
       </CardContent>
     </Card>
   );
