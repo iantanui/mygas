@@ -8,7 +8,7 @@ function BottomBar () {
         <NavLink to="/dashboard" activeClassName="active"> Dashboard</NavLink>
         <NavLink to="/products" activeClassName="active">Products</NavLink>
         <NavLink to="/refills" activeClassName="active">Refills</NavLink>
-        <NavLink to="/manage" activeClassName="active"> Manage</NavLink>
+        <NavLink to="/management" activeClassName="active"> Manage</NavLink>
     </div>
   );
 };
