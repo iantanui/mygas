@@ -32,13 +32,13 @@ const Management = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ margin: '0'}}>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
+          indicatorColor="none"
+          textColor="black"
           variant="fullWidth"
           aria-label="management tabs"
         >
