@@ -1,33 +1,129 @@
-import React from 'react';
-import { Card, CardContent, Typography, CardActions, IconButton, Grid } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Divider,
+  MenuItem,
+  Menu,
+} from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
 
-const GasTypeItem = ({ gasType, onEdit, onDelete }) => {
+const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Grid item xs={12} sm={6} md={4}>
-      <Card>
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            {gasType.name}
+    <Card
+      variant="outlined"
+      style={{
+        marginBottom: "10px",
+        position: "relative",
+        borderRadius: " 10px",
+      }}
+    >
+      <CardContent
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          padding: "8px",
+        }}
+      >
+        <div
+          style={{
+            alignItems: "center",
+            paddingBottom: "4px",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          {" "}
+          <Typography
+            style={{
+              padding: "1px 5px",
+              borderRadius: "50%",
+              border: "1px solid gray",
+              backgroundColor: "white",
+              color: "black",
+              textAlign: "center",
+            }}
+          >
+            {index + 1}
           </Typography>
-          <Typography color="textSecondary">
-            Wholesale Price 6kg: {gasType.wholesalePrice6kg}
-          </Typography>
-          <Typography color="textSecondary">
-            Wholesale Price 13kg: {gasType.wholesalePrice13kg}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <IconButton onClick={() => onEdit(gasType)} style={{ marginLeft: 'auto' }}>
-            <EditIcon />
+          <IconButton onClick={handleMenuOpen}>
+            <MoreVert />
           </IconButton>
-          <IconButton onClick={() => onDelete(gasType.id)} color="secondary">
-            <DeleteIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
-    </Grid>
+        </div>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+        >
+          <MenuItem
+            onClick={() => {
+              onEdit(gasType);
+              handleMenuClose();
+            }}
+          >
+            Edit
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              onDelete(gasType.id);
+              handleMenuClose();
+            }}
+          >
+            Delete
+          </MenuItem>
+        </Menu>
+
+        <Divider style={{ width: "95%", alignSelf: "center" }} />
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Gas type</span>
+          <span>{gasType.name} </span>
+        </Typography>
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>6 kg</span>
+          <span>KES {gasType.wholesalePrice6kg}</span>
+        </Typography>
+        <Typography
+          style={{
+            paddingLeft: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>13 kg</span>
+          <span>KES {gasType.wholesalePrice13kg}</span>
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
