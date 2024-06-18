@@ -5,12 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ProductContext from "./components/products/ProductContext";
 import RefillContext from "./components/refills/RefillContext";
+import GasTypeProvider from "./components/gasTypes/GasTypeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ProductContext>
     <RefillContext>
-      <App />
+      <GasTypeProvider>
+        <App />
+      </GasTypeProvider>
     </RefillContext>
   </ProductContext>
 );

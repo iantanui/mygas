@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AppBar, Tabs, Tab, Box, Typography, Container } from "@mui/material";
-import ProductsScreen from "./ProductsScreen";
 import RefillsScreen from "./RefillsScreen";
 import CustomersScreen from "./CustomerScreen"; // This component needs to be created
+import GasTypesScreen from "./GasTypeScreen";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -48,7 +48,7 @@ const Management = () => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ProductsScreen />
+        <GasTypesScreen />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <RefillsScreen />
