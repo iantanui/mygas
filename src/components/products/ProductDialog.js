@@ -18,26 +18,27 @@ function ProductDialog({ open, onClose, onSave, product }) {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [productName, setProductName] = useState("");
-  const [selectedGasTypes, setSelectedGasTypes] = useState([]);
+  const [selectedGasName, setSelectedGasName] = useState([]);
   const [selectedGasSize, setSelectedGasSize] = useState("");
 
   useEffect(() => {
     if (product) {
-      setQuantity(product.quantity);
-      setPrice(product.price);
-      setProductName(product.productName);
-      setSelectedGasTypes(product.gasTypes);
-      setSelectedGasSize(product.gasSize);
+      setQuantity(product.quantity || "");
+      setPrice(product.price || "");
+      setProductName(product.productName || "");
+      setSelectedGasName(product.gasName || "");
+      setSelectedGasSize(product.gasSize || "");
     } else {
       setQuantity("");
       setPrice("");
       setProductName("");
-      setSelectedGasTypes([]);
+      setSelectedGasName("");
+      setSelectedGasSize("");
     }
   }, [product]);
 
   const handleSave = () => {
-    onSave(productName, quantity, price, selectedGasTypes);
+    onSave(productName, quantity, price, selectedGasName, setSelectedGasSize);
   };
 
   return (
@@ -49,8 +50,8 @@ function ProductDialog({ open, onClose, onSave, product }) {
           <Select
             labelId="gas-type-label"
             id="gas-type-select"
-            value={selectedGasTypes}
-            onChange={(e) => setSelectedGasTypes(e.target.value)}
+            value={selectedGasName}
+            onChange={(e) => setProductName(e.target.value)}
           >
             {gasTypes.map((gasType) => (
               <MenuItem key={gasType.id} value={gasType.name}>
