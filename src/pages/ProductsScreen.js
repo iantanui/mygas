@@ -3,14 +3,11 @@ import ProductDialog from "../components/products/ProductDialog";
 import ProductItem from "../components/products/ProductItem";
 import { useProducts } from "../components/products/ProductContext";
 import { Button, Container, Divider, List, Typography } from "@mui/material";
-import { useGasTypes } from "../components/gasTypes/GasTypeContext";
 
 function ProductScreen() {
   const { products, addProduct, deleteProduct, updateProduct } = useProducts();
-  const { gasTypes } = useGasTypes;
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [selectedGasType, setSelectedGasType] = useState("");
 
   const handleSave = (name, quantity, price, selectedGasType) => {
     if (currentProduct) {
@@ -20,12 +17,8 @@ function ProductScreen() {
     }
     setShowDialog(false);
     setCurrentProduct(null);
-    setSelectedGasType("");
   };
 
-  const handleChangeGasType = (event) => {
-    setSelectedGasType(event.target.value);
-  };
 
   return (
     <Container style={{ padding: "8px" }}>
@@ -74,7 +67,6 @@ function ProductScreen() {
         onClose={() => setShowDialog(false)}
         onSave={handleSave}
         product={currentProduct}
-        gasTypes={gasTypes}
       />
     </Container>
   );

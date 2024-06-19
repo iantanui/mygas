@@ -71,7 +71,7 @@ const GasTypeItem = ({ index, gasType, onEdit, onDelete }) => {
         >
           <MenuItem
             onClick={() => {
-              onEdit(gasType);
+              onEdit();
               handleMenuClose();
             }}
           >

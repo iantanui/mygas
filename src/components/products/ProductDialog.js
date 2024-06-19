@@ -1,92 +1,78 @@
-import React, { useEffect, useState } from "react";
-import "./ProductDialog.css";
+import React, { useState, useEffect } from "react";
 import {
   Button,
-  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  TextField,
   FormControl,
   InputLabel,
-  ListItemText,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
-
-const gasTypes = [
-  { value: "6kg", label: "6kg" },
-  { value: "13kg", label: "13kg" },
-];
+import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function ProductDialog({ open, onClose, onSave, product }) {
-  const [name, setName] = useState("");
+  const { gasTypes } = useGasTypes();
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
-  const [selectedGasType, setSelectedGasType] = useState("");
+  const [productName, setProductName] = useState("");
+  const [selectedGasTypes, setSelectedGasTypes] = useState([]);
+  const [selectedGasSize, setSelectedGasSize] = useState("");
 
   useEffect(() => {
     if (product) {
-      setName(product.name || "");
-      setQuantity(product.quantity || "");
-      setPrice(product.price || "");
-      setSelectedGasType(product.availableGasTypes || "");
+      setQuantity(product.quantity);
+      setPrice(product.price);
+      setProductName(product.productName);
+      setSelectedGasTypes(product.gasTypes);
+      setSelectedGasSize(product.gasSize);
     } else {
-      setName("");
       setQuantity("");
       setPrice("");
-      setSelectedGasType([]);
+      setProductName("");
+      setSelectedGasTypes([]);
     }
   }, [product]);
 
   const handleSave = () => {
-    onSave(name, parseInt(quantity), parseFloat(price), selectedGasType);
-  };
-
-  const handleGasTypeChange = (event) => {
-    setSelectedGasType(event.target.value);
+    onSave(productName, quantity, price, selectedGasTypes);
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{product ? "Edit Product" : "Add Product"}</DialogTitle>
       <DialogContent>
-        <TextField
-          margin="dense"
-          label="Product Name"
-          fullWidth
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <FormControl fullWidth>
-          <InputLabel id="gas-type-label">Gas Type</InputLabel>
+        <FormControl fullWidth style={{ marginBottom: "10px" }}>
+          <InputLabel id="gas-type-label">Gas Name</InputLabel>
           <Select
             labelId="gas-type-label"
             id="gas-type-select"
-            multiple
-            value={selectedGasType}
-            onChange={handleGasTypeChange}
-            renderValue={(selected) => selected.join(", ")}
+            value={selectedGasTypes}
+            onChange={(e) => setSelectedGasTypes(e.target.value)}
           >
             {gasTypes.map((gasType) => (
-              <MenuItem key={gasType.value} value={gasType.value}>
-                <Checkbox
-                  checked={selectedGasType.indexOf(gasType.value) > -1}
-                />
-                <ListItemText primary={gasType.label} />
+              <MenuItem key={gasType.id} value={gasType.name}>
+                {gasType.name}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-        <TextField
-          margin="dense"
-          label="Quantity"
-          type="number"
-          fullWidth
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
+
+        <FormControl fullWidth>
+          <InputLabel id="gas-type-label">Gas Size</InputLabel>
+          <Select
+            labelId="gas-size-label"
+            id="gas-size-select"
+            value={selectedGasSize}
+            onChange={(e) => setSelectedGasSize(e.target.value)}
+          >
+            <MenuItem value="6kg">6 kg</MenuItem>
+            <MenuItem value="13kg">13 kg</MenuItem>
+          </Select>
+        </FormControl>
+
         <TextField
           margin="dense"
           label="Price"
@@ -95,22 +81,27 @@ function ProductDialog({ open, onClose, onSave, product }) {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
+        <TextField
+          margin="dense"
+          label="Quantity"
+          type="number"
+          fullWidth
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
       </DialogContent>
-
       <DialogActions>
         <Button
-          variant="contained"
-          color="primary"
-          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
           onClick={onClose}
+          color="primary"
+          style={{ color: "white", backgroundColor: "black" }}
         >
           Cancel
         </Button>
         <Button
-          variant="contained"
-          color="primary"
-          style={{ backgroundColor: "black", color: "white", padding: "10px" }}
           onClick={handleSave}
+          color="primary"
+          style={{ color: "white", backgroundColor: "black" }}
         >
           Save
         </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogActions,
@@ -6,14 +6,12 @@ import {
   DialogTitle,
   TextField,
   Button,
-} from '@mui/material';
-import { useGasTypes } from './GasTypeContext';
+} from "@mui/material";
 
 const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
-  const { addGasType } = useGasTypes();
-  const [name, setName] = useState('');
-  const [wholesalePrice6kg, setWholesalePrice6kg] = useState('');
-  const [wholesalePrice13kg, setWholesalePrice13kg] = useState('');
+  const [name, setName] = useState("");
+  const [wholesalePrice6kg, setWholesalePrice6kg] = useState("");
+  const [wholesalePrice13kg, setWholesalePrice13kg] = useState("");
 
   useEffect(() => {
     if (gasType) {
@@ -21,24 +19,23 @@ const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
       setWholesalePrice6kg(gasType.wholesalePrice6kg);
       setWholesalePrice13kg(gasType.wholesalePrice13kg);
     } else {
-      setName('');
-      setWholesalePrice6kg('');
-      setWholesalePrice13kg('');
+      setName("");
+      setWholesalePrice6kg("");
+      setWholesalePrice13kg("");
     }
   }, [gasType]);
 
   const handleSave = () => {
-    if (gasType) {
-      onSave(gasType.id, name, parseFloat(wholesalePrice6kg), parseFloat(wholesalePrice13kg));
-    } else {
-      addGasType(name, parseFloat(wholesalePrice6kg), parseFloat(wholesalePrice13kg));
-    }
-    onClose();
+    onSave(
+      name,
+      parseFloat(wholesalePrice6kg),
+      parseFloat(wholesalePrice13kg)
+    );
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{gasType ? 'Edit Gas Type' : 'Add Gas Type'}</DialogTitle>
+      <DialogTitle>{gasType ? "Edit Gas Type" : "Add Gas Type"}</DialogTitle>
       <DialogContent>
         <TextField
           label="Gas Type Name"
@@ -65,10 +62,13 @@ const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} style={{ color: 'black' }}>
+        <Button onClick={onClose} style={{ color: "black" }}>
           Cancel
         </Button>
-        <Button onClick={handleSave} style={{ backgroundColor: 'black', color: 'white' }}>
+        <Button
+          onClick={handleSave}
+          style={{ backgroundColor: "black", color: "white" }}
+        >
           Save
         </Button>
       </DialogActions>
