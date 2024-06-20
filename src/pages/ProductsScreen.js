@@ -9,16 +9,22 @@ function ProductScreen() {
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
-  const handleSave = (name, quantity, price, selectedGasType) => {
+  const handleSave = (productName, quantity, price, gasName, gasSize) => {
     if (currentProduct) {
-      updateProduct(currentProduct.id, name, quantity, price, selectedGasType);
+      updateProduct(
+        currentProduct.id,
+        productName,
+        quantity,
+        price,
+        gasName,
+        gasSize
+      );
     } else {
-      addProduct(name, quantity, price, selectedGasType);
+      addProduct(productName, quantity, price, gasName, gasSize);
     }
     setShowDialog(false);
     setCurrentProduct(null);
   };
-
 
   return (
     <Container style={{ padding: "8px" }}>
@@ -43,23 +49,20 @@ function ProductScreen() {
       </Button>
 
       <List>
-        {products
-          .slice()
-          .reverse()
-          .map((product, index) => (
-            <React.Fragment key={product.id}>
-              <ProductItem
-                index={index}
-                product={product}
-                onEdit={() => {
-                  setCurrentProduct(product);
-                  setShowDialog(true);
-                }}
-                onDelete={() => deleteProduct(product.id)}
-              />
-              <Divider />
-            </React.Fragment>
-          ))}
+        {products.map((product, index) => (
+          <React.Fragment key={product.id}>
+            <ProductItem
+              index={index}
+              product={product}
+              onEdit={(editedProduct) => {
+                setCurrentProduct(editedProduct);
+                setShowDialog(true);
+              }}
+              onDelete={(productId) => deleteProduct(productId)}
+            />
+            <Divider />
+          </React.Fragment>
+        ))}
       </List>
 
       <ProductDialog

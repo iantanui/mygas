@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import { MoreVert } from "@mui/icons-material";
 
 function ProductItem({ index, product, onEdit, onDelete }) {
@@ -27,7 +27,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
       style={{
         marginBottom: "10px",
         position: "relative",
-        borderRadius: " 10px",
+        borderRadius: "10px",
       }}
     >
       <CardContent
@@ -98,8 +98,8 @@ function ProductItem({ index, product, onEdit, onDelete }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Name</span>
-          <span>{product.name}</span>
+          <span>Gas Name</span>
+          <span>{product.gasName}</span>
         </Typography>
         <Typography
           style={{
@@ -109,8 +109,8 @@ function ProductItem({ index, product, onEdit, onDelete }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Gas type</span>
-          <span>{product.selectedGasType} </span>
+          <span>Gas size</span>
+          <span>{product.gasSize}</span>
         </Typography>
         <Typography
           style={{
