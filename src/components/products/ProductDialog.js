@@ -12,11 +12,9 @@ import {
   Select,
 } from "@mui/material";
 import { useGasTypes } from "../gasTypes/GasTypeContext";
-import { useProducts } from "./ProductContext";
 
 function ProductDialog({ open, onClose, onSave, product }) {
   const { gasTypes } = useGasTypes();
-  const { addProduct, updateProduct } = useProducts();
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [selectedGasName, setSelectedGasName] = useState("");
@@ -37,25 +35,13 @@ function ProductDialog({ open, onClose, onSave, product }) {
   }, [product]);
 
   const handleSave = () => {
-    if (product) {
-      updateProduct(
-        product.id,
+    onSave(
         selectedGasName,
         quantity,
         price,
         selectedGasName,
         selectedGasSize
       );
-    } else {
-      addProduct(
-        selectedGasName,
-        quantity,
-        price,
-        selectedGasName,
-        selectedGasSize
-      );
-    }
-    onClose();
   };
 
   return (
