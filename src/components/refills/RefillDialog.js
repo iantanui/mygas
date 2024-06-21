@@ -11,8 +11,10 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function RefillDialog({ open, onClose, onSave, refill }) {
+  const { gasTypes } = useGasTypes();
   const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedGasType, setSelectedGasType] = useState("");
@@ -36,13 +38,13 @@ function RefillDialog({ open, onClose, onSave, refill }) {
   }, [refill]);
 
   const handleSave = () => {
-    onSave({
+    onSave(
       customerName,
       phoneNumber,
-      quantity: parseInt(quantity),
-      gasType: selectedGasType,
-      gasSize: selectedGasSize,
-    });
+      parseInt(quantity),
+      selectedGasType,
+      selectedGasSize,
+    );
   };
 
   return (
@@ -51,7 +53,7 @@ function RefillDialog({ open, onClose, onSave, refill }) {
       <DialogContent>
         <TextField
           margin="dense"
-          label="Refill name"
+          label="Customer name"
           fullWidth
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
@@ -72,10 +74,11 @@ function RefillDialog({ open, onClose, onSave, refill }) {
             value={selectedGasType}
             onChange={(e) => setSelectedGasType(e.target.value)}
           >
-            <MenuItem value="Propane">Propane</MenuItem>
-            <MenuItem value="Butane">Butane</MenuItem>
-            <MenuItem value="Natural Gas">Natural Gas</MenuItem>
-            {/* Add other gas types as needed */}
+            {gasTypes.map((gasType) => (
+              <MenuItem key={gasType.id} value={gasType.name}>
+                {gasType.name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl fullWidth style={{ marginTop: "10px" }}>

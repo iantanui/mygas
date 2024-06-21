@@ -111,7 +111,7 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           <span>Customer Name</span>
           <span>{refill.customerName}</span>
         </Typography>
-        
+
         <Typography
           style={{
             padding: "8px",
@@ -160,17 +160,6 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           <span>{refill.quantity}</span>
         </Typography>
 
-        <Typography
-          style={{
-            padding: "8px",
-            display: "flex",
-            width: "95%",
-            justifyContent: "space-between",
-          }}
-        >
-          <span>Price</span>
-          <span>{refill.price}</span>
-        </Typography>
       </CardContent>
     </Card>
   );
