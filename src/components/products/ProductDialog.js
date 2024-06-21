@@ -22,10 +22,10 @@ function ProductDialog({ open, onClose, onSave, product }) {
 
   useEffect(() => {
     if (product) {
-      setQuantity(product.quantity);
-      setPrice(product.price);
-      setSelectedGasName(product.gasName);
-      setSelectedGasSize(product.gasSize);
+      setQuantity(product.quantity || "");
+      setPrice(product.price || "");
+      setSelectedGasName(product.gasName || "");
+      setSelectedGasSize(product.gasSize || "");
     } else {
       setQuantity("");
       setPrice("");
