@@ -9,11 +9,24 @@ const Refills = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentRefill, setCurrentRefill] = useState(null);
 
-  const handleSave = (name, quantity, price) => {
+  const handleSave = (
+    customerName,
+    phoneNumber,
+    gasType,
+    gasSize,
+    quantity
+  ) => {
     if (currentRefill) {
-      updateRefill(currentRefill.id, name, quantity, price);
+      updateRefill(
+        currentRefill.id,
+        customerName,
+        phoneNumber,
+        gasType,
+        gasSize,
+        quantity
+      );
     } else {
-      addRefill(name, quantity, price);
+      addRefill(customerName, phoneNumber, gasType, gasSize, quantity);
     }
     setShowDialog(false);
     setCurrentRefill(null);
@@ -34,7 +47,10 @@ const Refills = () => {
           marginTop: "1rem",
           marginBottom: "1rem",
         }}
-        onClick={() => setShowDialog(true)}
+        onClick={() => {
+          setCurrentRefill(null);
+          setShowDialog(true);
+        }}
       >
         Add Refill
       </Button>
@@ -61,7 +77,10 @@ const Refills = () => {
 
       <RefillDialog
         open={showDialog}
-        onClose={() => setShowDialog(false)}
+        onClose={() => {
+          setShowDialog(false);
+          setCurrentRefill(null);
+        }}
         onSave={handleSave}
         refill={currentRefill}
       />

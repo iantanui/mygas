@@ -5,13 +5,14 @@ export const RefillContext = createContext();
 const RefillProvider = ({ children }) => {
   const [refills, setRefills] = useState([]);
 
-  const addRefill = (name, quantity, price) => {
+  const addRefill = (customerName, phoneNumber, gasType, gasSize, quantity) => {
     const newRefill = {
       id: Date.now().toString(),
-      name,
+      customerName,
+      phoneNumber,
+      gasType,
+      gasSize,
       quantity,
-      price,
-      date: new Date().toISOString(),
     };
     setRefills((prevRefills) => [...prevRefills, newRefill]);
   };
@@ -22,10 +23,10 @@ const RefillProvider = ({ children }) => {
     );
   };
 
-  const updateRefill = (id, name, quantity, price) => {
+  const updateRefill = (id, customerName, phoneNumber, gasType, gasSize, quantity) => {
     setRefills((prevRefills) =>
       prevRefills.map((refill) =>
-        refill.id === id ? { ...refill, name, quantity, price } : refill
+        refill.id === id ? { ...refill, customerName, phoneNumber, gasType, gasSize, quantity} : refill
       )
     );
   };

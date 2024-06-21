@@ -108,8 +108,44 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Name</span>
-          <span>{refill.name}</span>
+          <span>Customer Name</span>
+          <span>{refill.customerName}</span>
+        </Typography>
+        
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Phone Number</span>
+          <span>{refill.phoneNumber}</span>
+        </Typography>
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Gas Type</span>
+          <span>{refill.gasType}</span>
+        </Typography>
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Gas Size</span>
+          <span>{refill.gasSize}</span>
         </Typography>
 
         <Typography

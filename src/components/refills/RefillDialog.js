@@ -4,29 +4,45 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 function RefillDialog({ open, onClose, onSave, refill }) {
-  const [name, setName] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedGasType, setSelectedGasType] = useState("");
+  const [selectedGasSize, setSelectedGasSize] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
 
   useEffect(() => {
     if (refill) {
-      setName(refill.name);
-      setQuantity(refill.quantity);
-      setPrice(refill.price);
+      setCustomerName(refill.customerName || "");
+      setPhoneNumber(refill.phoneNumber || "");
+      setQuantity(refill.quantity || "");
+      setSelectedGasType(refill.gasType || "");
+      setSelectedGasSize(refill.gasSize || "");
     } else {
-      setName("");
+      setCustomerName("");
       setQuantity("");
-      setPrice("");
+      setPhoneNumber("");
+      setSelectedGasType("");
+      setSelectedGasSize("");
     }
   }, [refill]);
 
   const handleSave = () => {
-    onSave(name, parseInt(quantity), parseFloat(price));
+    onSave({
+      customerName,
+      phoneNumber,
+      quantity: parseInt(quantity),
+      gasType: selectedGasType,
+      gasSize: selectedGasSize,
+    });
   };
 
   return (
@@ -37,9 +53,44 @@ function RefillDialog({ open, onClose, onSave, refill }) {
           margin="dense"
           label="Refill name"
           fullWidth
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
         />
+        <TextField
+          margin="dense"
+          label="Phone number"
+          type="number"
+          fullWidth
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <FormControl fullWidth style={{ marginTop: "10px" }}>
+          <InputLabel id="gas-type-label">Gas Type</InputLabel>
+          <Select
+            labelId="gas-type-label"
+            id="gas-type-select"
+            value={selectedGasType}
+            onChange={(e) => setSelectedGasType(e.target.value)}
+          >
+            <MenuItem value="Propane">Propane</MenuItem>
+            <MenuItem value="Butane">Butane</MenuItem>
+            <MenuItem value="Natural Gas">Natural Gas</MenuItem>
+            {/* Add other gas types as needed */}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth style={{ marginTop: "10px" }}>
+          <InputLabel id="gas-size-label">Gas Size</InputLabel>
+          <Select
+            labelId="gas-size-label"
+            id="gas-size-select"
+            value={selectedGasSize}
+            onChange={(e) => setSelectedGasSize(e.target.value)}
+          >
+            <MenuItem value="6kg">6 kg</MenuItem>
+            <MenuItem value="13kg">13 kg</MenuItem>
+            {/* Add other gas sizes as needed */}
+          </Select>
+        </FormControl>
         <TextField
           margin="dense"
           label="Quantity"
@@ -47,14 +98,6 @@ function RefillDialog({ open, onClose, onSave, refill }) {
           fullWidth
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          label="Price"
-          type="number"
-          fullWidth
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
         />
       </DialogContent>
 
@@ -67,7 +110,7 @@ function RefillDialog({ open, onClose, onSave, refill }) {
         >
           Cancel
         </Button>
-        
+
         <Button
           variant="contained"
           color="primary"
