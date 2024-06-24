@@ -38,13 +38,28 @@ function RefillDialog({ open, onClose, onSave, refill }) {
   }, [refill]);
 
   const handleSave = () => {
-    onSave(
-      customerName,
-      phoneNumber,
-      parseInt(quantity),
-      selectedGasType,
-      selectedGasSize,
-    );
+    if (
+      customerName &&
+      phoneNumber &&
+      quantity &&
+      selectedGasType &&
+      selectedGasSize
+    ) {
+      onSave(
+        customerName,
+        phoneNumber,
+        parseInt(quantity),
+        selectedGasType,
+        selectedGasSize
+      );
+      setCustomerName("");
+      setPhoneNumber("");
+      setSelectedGasType("");
+      setSelectedGasSize("");
+      setQuantity("");
+    } else {
+      // error
+    }
   };
 
   return (
@@ -91,7 +106,6 @@ function RefillDialog({ open, onClose, onSave, refill }) {
           >
             <MenuItem value="6kg">6 kg</MenuItem>
             <MenuItem value="13kg">13 kg</MenuItem>
-            {/* Add other gas sizes as needed */}
           </Select>
         </FormControl>
         <TextField
