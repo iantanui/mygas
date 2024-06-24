@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -6,59 +7,74 @@ import {
   DialogTitle,
   FormControl,
   InputLabel,
-  MenuItem,
-  Select,
   TextField,
+  Checkbox,
+  Grid,
+  ListItemText,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function RefillDialog({ open, onClose, onSave, refill }) {
   const { gasTypes } = useGasTypes();
   const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedGasType, setSelectedGasType] = useState("");
+  const [selectedGasTypes, setSelectedGasTypes] = useState([]);
   const [selectedGasSize, setSelectedGasSize] = useState("");
-  const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
     if (refill) {
       setCustomerName(refill.customerName || "");
       setPhoneNumber(refill.phoneNumber || "");
-      setQuantity(refill.quantity || "");
-      setSelectedGasType(refill.gasType || "");
       setSelectedGasSize(refill.gasSize || "");
+      setSelectedGasTypes(refill.gasTypes || []);
     } else {
       setCustomerName("");
-      setQuantity("");
       setPhoneNumber("");
-      setSelectedGasType("");
       setSelectedGasSize("");
+      setSelectedGasTypes([]);
     }
   }, [refill]);
+
+  const handleGasTypeToggle = (gasType) => () => {
+    const currentIndex = selectedGasTypes.findIndex(
+      (item) => item.name === gasType.name
+    );
+    const newSelectedGasTypes = [...selectedGasTypes];
+
+    if (currentIndex === -1) {
+      newSelectedGasTypes.push({ name: gasType.name, quantity: 0 });
+    } else {
+      newSelectedGasTypes.splice(currentIndex, 1);
+    }
+
+    setSelectedGasTypes(newSelectedGasTypes);
+  };
+
+  const handleQuantityChange = (gasType) => (event) => {
+    const newSelectedGasTypes = selectedGasTypes.map((item) =>
+      item.name === gasType.name
+        ? { ...item, quantity: parseInt(event.target.value) || 0 }
+        : item
+    );
+    setSelectedGasTypes(newSelectedGasTypes);
+  };
 
   const handleSave = () => {
     if (
       customerName &&
       phoneNumber &&
-      quantity &&
-      selectedGasType &&
-      selectedGasSize
+      selectedGasSize &&
+      selectedGasTypes.length > 0 &&
+      selectedGasTypes.every((gasType) => gasType.quantity > 0)
     ) {
-      onSave(
-        customerName,
-        phoneNumber,
-        parseInt(quantity),
-        selectedGasType,
-        selectedGasSize
-      );
+      onSave(customerName, phoneNumber, selectedGasSize, selectedGasTypes);
       setCustomerName("");
       setPhoneNumber("");
-      setSelectedGasType("");
       setSelectedGasSize("");
-      setQuantity("");
+      setSelectedGasTypes([]);
     } else {
-      // error
+      // Show error or validation message
+      console.error("Please fill in all required fields.");
     }
   };
 
@@ -82,42 +98,63 @@ function RefillDialog({ open, onClose, onSave, refill }) {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <FormControl fullWidth style={{ marginTop: "10px" }}>
-          <InputLabel id="gas-type-label">Gas Type</InputLabel>
-          <Select
-            labelId="gas-type-label"
-            id="gas-type-select"
-            value={selectedGasType}
-            onChange={(e) => setSelectedGasType(e.target.value)}
-          >
-            {gasTypes.map((gasType) => (
-              <MenuItem key={gasType.id} value={gasType.name}>
-                {gasType.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginTop: "10px" }}>
           <InputLabel id="gas-size-label">Gas Size</InputLabel>
-          <Select
+          <TextField
+            select
             labelId="gas-size-label"
             id="gas-size-select"
             value={selectedGasSize}
             onChange={(e) => setSelectedGasSize(e.target.value)}
+            fullWidth
           >
-            <MenuItem value="6kg">6 kg</MenuItem>
-            <MenuItem value="13kg">13 kg</MenuItem>
-          </Select>
+            <option value="6kg">6 kg</option>
+            <option value="13kg">13 kg</option>
+            {/* Add other gas sizes as needed */}
+          </TextField>
         </FormControl>
-        <TextField
-          margin="dense"
-          label="Quantity"
-          type="number"
-          fullWidth
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
+        {gasTypes.map((gasType) => (
+          <Grid
+            container
+            alignItems="center"
+            key={gasType.id}
+            style={{ marginTop: "10px" }}
+          >
+            <Grid item xs={4}>
+              <FormControl>
+                <Checkbox
+                  checked={selectedGasTypes.some(
+                    (item) => item.name === gasType.name
+                  )}
+                  onChange={handleGasTypeToggle(gasType)}
+                />
+              </FormControl>
+              <FormControl>
+                <ListItemText primary={gasType.name} />
+              </FormControl>
+              <FormControl>
+                <InputLabel>{gasType.name}</InputLabel>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl>
+                <TextField
+                  margin="dense"
+                  type="number"
+                  value={
+                    selectedGasTypes.find((item) => item.name === gasType.name)
+                      ?.quantity || ""
+                  }
+                  onChange={handleQuantityChange(gasType)}
+                  disabled={
+                    !selectedGasTypes.some((item) => item.name === gasType.name)
+                  }
+                  inputProps={{ min: 0 }}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+        ))}
       </DialogContent>
-
       <DialogActions>
         <Button
           variant="contained"
@@ -127,7 +164,6 @@ function RefillDialog({ open, onClose, onSave, refill }) {
         >
           Cancel
         </Button>
-
         <Button
           variant="contained"
           color="primary"
