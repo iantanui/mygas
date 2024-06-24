@@ -35,13 +35,21 @@ function ProductDialog({ open, onClose, onSave, product }) {
   }, [product]);
 
   const handleSave = () => {
-    onSave(
+    if (selectedGasName && quantity && price && selectedGasSize) {
+      onSave(
         selectedGasName,
-        quantity,
+        parseInt(quantity),
         price,
         selectedGasName,
         selectedGasSize
       );
+      setSelectedGasName("");
+      setQuantity("");
+      setPrice("");
+      setSelectedGasSize("");
+    } else {
+      // error
+    }
   };
 
   return (

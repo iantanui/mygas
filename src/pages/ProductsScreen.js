@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductDialog from "../components/products/ProductDialog";
 import ProductItem from "../components/products/ProductItem";
 import { useProducts } from "../components/products/ProductContext";
-import { Button, Container, Divider, List, Typography } from "@mui/material";
+import { Button, Container, List, Typography } from "@mui/material";
 
 function ProductScreen() {
   const { products, addProduct, deleteProduct, updateProduct } = useProducts();
@@ -60,7 +60,7 @@ function ProductScreen() {
               }}
               onDelete={(productId) => deleteProduct(productId)}
             />
-            <Divider />
+          
           </React.Fragment>
         ))}
       </List>
