@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Divider, List, Typography } from "@mui/material";
+import { Button, Container, List, Typography } from "@mui/material";
 import RefillItem from "../components/refills/RefillItem";
 import RefillDialog from "../components/refills/RefillDialog";
 import { useRefills } from "../components/refills/RefillContext";
@@ -70,7 +70,7 @@ const Refills = () => {
                 }}
                 onDelete={() => deleteRefill(refill.id)}
               />
-              <Divider />
+              
             </React.Fragment>
           ))}
       </List>
