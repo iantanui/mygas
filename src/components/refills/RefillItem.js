@@ -9,8 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-
-function RefillItem({ index, refill, onView, onEdit, onDelete }) {
+function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuOpen = (event) => {
@@ -20,6 +19,9 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  // Check if product and product.price are defined
+  const totalPrice = product && product.price ? refill.quantity * product.price : 0;
 
   return (
     <Card
@@ -38,6 +40,7 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           padding: "8px",
         }}
       >
+        {/* Header with index and menu */}
         <div
           style={{
             alignItems: "center",
@@ -65,6 +68,7 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           </IconButton>
         </div>
 
+        {/* Menu */}
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -98,8 +102,10 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           </MenuItem>
         </Menu>
 
+        {/* Divider */}
         <Divider style={{ width: "95%", alignSelf: "center" }} />
 
+        {/* Details */}
         <Typography
           style={{
             padding: "8px",
@@ -160,9 +166,21 @@ function RefillItem({ index, refill, onView, onEdit, onDelete }) {
           <span>{refill.quantity}</span>
         </Typography>
 
+        {/* Total Price */}
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Total Price</span>
+          <span>{totalPrice}</span>
+        </Typography>
       </CardContent>
     </Card>
   );
-}
+};
 
 export default RefillItem;
