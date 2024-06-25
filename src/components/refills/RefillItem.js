@@ -22,7 +22,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
   };
 
   // Check if product and product.price are defined
-  const totalPrice = product && product.price ? refill.gasType * product.price : 0;
+  const totalPrice = product && product.price ? refill.quantity * product.price : 0;
 
   return (
     <Card
@@ -140,7 +140,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Gas Type</span>
-          <span>{refill.gasSize}</span>
+          <span>{refill.gasType}</span>
         </Typography>
 
         <Typography
@@ -152,7 +152,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Gas Size</span>
-          <span>{refill.quantity}</span>
+          <span>{refill.gasSize}</span>
         </Typography>
 
         <Typography
@@ -164,7 +164,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Quantity</span>
-          <span>{refill.gasType}</span>
+          <span>{refill.quantity}</span>
         </Typography>
 
         {/* Total Price */}
