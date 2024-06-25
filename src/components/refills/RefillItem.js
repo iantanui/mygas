@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+
 function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -21,7 +22,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
   };
 
   // Check if product and product.price are defined
-  const totalPrice = product && product.price ? refill.quantity * product.price : 0;
+  const totalPrice = product && product.price ? refill.gasType * product.price : 0;
 
   return (
     <Card
@@ -139,18 +140,6 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Gas Type</span>
-          <span>{refill.gasType}</span>
-        </Typography>
-
-        <Typography
-          style={{
-            padding: "8px",
-            display: "flex",
-            width: "95%",
-            justifyContent: "space-between",
-          }}
-        >
-          <span>Gas Size</span>
           <span>{refill.gasSize}</span>
         </Typography>
 
@@ -162,8 +151,20 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Quantity</span>
+          <span>Gas Size</span>
           <span>{refill.quantity}</span>
+        </Typography>
+
+        <Typography
+          style={{
+            padding: "8px",
+            display: "flex",
+            width: "95%",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>Quantity</span>
+          <span>{refill.gasType}</span>
         </Typography>
 
         {/* Total Price */}
