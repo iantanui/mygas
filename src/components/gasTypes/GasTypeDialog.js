@@ -28,8 +28,8 @@ const GasTypeDialog = ({ open, onClose, gasType, onSave }) => {
   const handleSave = () => {
     onSave(
       name,
-      parseFloat(wholesalePrice6kg),
-      parseFloat(wholesalePrice13kg)
+      parseInt(wholesalePrice6kg),
+      parseInt(wholesalePrice13kg)
     );
   };
 

@@ -9,18 +9,17 @@ function ProductScreen() {
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
-  const handleSave = (productName, quantity, price, gasName, gasSize) => {
+  const handleSave = (gasName, gasSize, quantity, sellingPrice) => {
     if (currentProduct) {
       updateProduct(
         currentProduct.id,
-        productName,
-        quantity,
-        price,
         gasName,
-        gasSize
+        gasSize,
+        quantity,
+        sellingPrice
       );
     } else {
-      addProduct(productName, quantity, price, gasName, gasSize);
+      addProduct(gasName, gasSize, quantity, sellingPrice);
     }
     setShowDialog(false);
     setCurrentProduct(null);
@@ -60,7 +59,6 @@ function ProductScreen() {
               }}
               onDelete={(productId) => deleteProduct(productId)}
             />
-          
           </React.Fragment>
         ))}
       </List>

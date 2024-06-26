@@ -5,12 +5,12 @@ export const ProductContext = createContext();
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
-  const addProduct = (productName,quantity, price, gasName, gasSize) => {
+  const addProduct = (productName, quantity, sellingPrice, gasName, gasSize) => {
     const newProduct = {
       id: Date.now().toString(),
       productName,
       quantity,
-      price,
+      sellingPrice,
       gasName,
       gasSize,
     };
@@ -23,11 +23,11 @@ const ProductProvider = ({ children }) => {
     );
   };
 
-  const updateProduct = (productId, productName, quantity, price, gasName, gasSize) => {
+  const updateProduct = (productId, productName, quantity, sellingPrice, gasName, gasSize) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === productId
-          ? { ...product, productName, quantity, price, gasName, gasSize }
+          ? { ...product, productName, quantity, sellingPrice, gasName, gasSize }
           : product
       )
     );

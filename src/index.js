@@ -9,13 +9,13 @@ import GasTypeProvider from "./components/gasTypes/GasTypeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ProductContext>
-    <RefillContext>
-      <GasTypeProvider>
+  <GasTypeProvider>
+    <ProductContext>
+      <RefillContext>
         <App />
-      </GasTypeProvider>
-    </RefillContext>
-  </ProductContext>
+      </RefillContext>
+    </ProductContext>
+  </GasTypeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

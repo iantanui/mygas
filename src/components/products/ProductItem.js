@@ -132,7 +132,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           }}
         >
           <span>Price</span>
-          <span>KES {product.price}</span>
+          <span>KES {product.sellingPrice}</span>
         </Typography>
       </CardContent>
     </Card>

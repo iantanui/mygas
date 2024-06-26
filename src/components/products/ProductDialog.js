@@ -16,36 +16,35 @@ import { useGasTypes } from "../gasTypes/GasTypeContext";
 function ProductDialog({ open, onClose, onSave, product }) {
   const { gasTypes } = useGasTypes();
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
+  const [sellingPrice, setSellingPrice] = useState("");
   const [selectedGasName, setSelectedGasName] = useState("");
   const [selectedGasSize, setSelectedGasSize] = useState("");
 
   useEffect(() => {
     if (product) {
-      setQuantity(product.quantity || "");
-      setPrice(product.price || "");
-      setSelectedGasName(product.gasName || "");
-      setSelectedGasSize(product.gasSize || "");
+      setQuantity(product.quantity);
+      setSellingPrice(product.sellingPrice);
+      setSelectedGasName(product.gasName);
+      setSelectedGasSize(product.gasSize);
     } else {
       setQuantity("");
-      setPrice("");
+      setSellingPrice("");
       setSelectedGasName("");
       setSelectedGasSize("");
     }
   }, [product]);
 
   const handleSave = () => {
-    if (selectedGasName && quantity && price && selectedGasSize) {
+    if (selectedGasName && quantity && sellingPrice && selectedGasSize) {
       onSave(
         selectedGasName,
+        selectedGasSize,
         parseInt(quantity),
-        price,
-        selectedGasName,
-        selectedGasSize
+        sellingPrice
       );
       setSelectedGasName("");
       setQuantity("");
-      setPrice("");
+      setSellingPrice("");
       setSelectedGasSize("");
     } else {
       // error
@@ -90,8 +89,8 @@ function ProductDialog({ open, onClose, onSave, product }) {
           label="Price"
           type="number"
           fullWidth
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          value={sellingPrice}
+          onChange={(e) => setSellingPrice(e.target.value)}
         />
         <TextField
           margin="dense"
