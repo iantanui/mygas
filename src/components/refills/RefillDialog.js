@@ -11,13 +11,14 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useGasTypes } from "../gasTypes/GasTypeContext";
+import { useProducts } from "../products/ProductContext";
+ // Update the import path
 
 function RefillDialog({ open, onClose, onSave, refill }) {
-  const { gasTypes } = useGasTypes();
+  const { products } = useProducts();
   const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedGasType, setSelectedGasType] = useState("");
+  const [selectedGasName, setSelectedGasName] = useState("");
   const [selectedGasSize, setSelectedGasSize] = useState("");
   const [quantity, setQuantity] = useState("");
 
@@ -26,41 +27,40 @@ function RefillDialog({ open, onClose, onSave, refill }) {
       setCustomerName(refill.customerName || "");
       setPhoneNumber(refill.phoneNumber || "");
       setQuantity(refill.quantity || "");
-      setSelectedGasType(refill.gasType || "");
+      setSelectedGasName(refill.gasName || "");
       setSelectedGasSize(refill.gasSize || "");
     } else {
       setCustomerName("");
       setQuantity("");
       setPhoneNumber("");
-      setSelectedGasType("");
+      setSelectedGasName("");
       setSelectedGasSize("");
     }
   }, [refill]);
 
   const handleSave = () => {
-    if (
-      customerName &&
-      phoneNumber &&
-      quantity &&
-      selectedGasType &&
-      selectedGasSize
-    ) {
-      onSave(
-        customerName,
-        phoneNumber,
-        parseInt(quantity),
-        selectedGasType,
-        selectedGasSize
-      );
-      setCustomerName("");
-      setPhoneNumber("");
-      setSelectedGasType("");
-      setSelectedGasSize("");
-      setQuantity("");
+    if (customerName && phoneNumber && quantity && selectedGasName && selectedGasSize) {
+      const product = products.find(p => p.gasName === selectedGasName && p.gasSize === selectedGasSize);
+      if (product) {
+        onSave(customerName, phoneNumber, parseInt(quantity), product.id);
+        setCustomerName("");
+        setPhoneNumber("");
+        setSelectedGasName("");
+        setSelectedGasSize("");
+        setQuantity("");
+      }
     } else {
       // error
     }
   };
+
+  // Get unique gas names from products
+  const gasNames = [...new Set(products.map(product => product.gasName))];
+
+  // Filter sizes based on selected gas name
+  const gasSizes = products
+    .filter(product => product.gasName === selectedGasName)
+    .map(product => product.gasSize);
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -82,16 +82,16 @@ function RefillDialog({ open, onClose, onSave, refill }) {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <FormControl fullWidth style={{ marginTop: "10px" }}>
-          <InputLabel id="gas-type-label">Gas Type</InputLabel>
+          <InputLabel id="gas-name-label">Gas Name</InputLabel>
           <Select
-            labelId="gas-type-label"
-            id="gas-type-select"
-            value={selectedGasType}
-            onChange={(e) => setSelectedGasType(e.target.value)}
+            labelId="gas-name-label"
+            id="gas-name-select"
+            value={selectedGasName}
+            onChange={(e) => setSelectedGasName(e.target.value)}
           >
-            {gasTypes.map((gasType) => (
-              <MenuItem key={gasType.id} value={gasType.name}>
-                {gasType.name}
+            {gasNames.map((gasName) => (
+              <MenuItem key={gasName} value={gasName}>
+                {gasName}
               </MenuItem>
             ))}
           </Select>
@@ -103,9 +103,13 @@ function RefillDialog({ open, onClose, onSave, refill }) {
             id="gas-size-select"
             value={selectedGasSize}
             onChange={(e) => setSelectedGasSize(e.target.value)}
+            disabled={!selectedGasName}
           >
-            <MenuItem value="6kg">6 kg</MenuItem>
-            <MenuItem value="13kg">13 kg</MenuItem>
+            {gasSizes.map((gasSize) => (
+              <MenuItem key={gasSize} value={gasSize}>
+                {gasSize}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
         <TextField

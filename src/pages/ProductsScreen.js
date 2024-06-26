@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import ProductDialog from "../components/products/ProductDialog";
 import ProductItem from "../components/products/ProductItem";
-import { useProducts } from "../components/products/ProductContext";
 import { Button, Container, List, Typography } from "@mui/material";
+import { useProducts } from "../components/products/ProductContext";
 
 function ProductScreen() {
   const { products, addProduct, deleteProduct, updateProduct } = useProducts();
   const [showDialog, setShowDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
 
-  const handleSave = (gasName, gasSize, quantity, sellingPrice) => {
+  const handleSave = (gasTypeId, gasSize, quantity, sellingPrice) => {
     if (currentProduct) {
       updateProduct(
         currentProduct.id,
-        gasName,
+        gasTypeId,
         gasSize,
         quantity,
         sellingPrice
       );
     } else {
-      addProduct(gasName, gasSize, quantity, sellingPrice);
+      addProduct(gasTypeId, gasSize, quantity, sellingPrice);
     }
     setShowDialog(false);
     setCurrentProduct(null);

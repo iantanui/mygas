@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { MoreVert } from "@mui/icons-material";
 import {
   Card,
   CardContent,
@@ -8,10 +8,12 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { MoreVert } from "@mui/icons-material";
+import React, { useState } from "react";
+import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function ProductItem({ index, product, onEdit, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { gasTypes } = useGasTypes(); // Access gas types context
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -20,6 +22,10 @@ function ProductItem({ index, product, onEdit, onDelete }) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  // Find the gas name from gasTypes using the product.gasTypeId
+  const gasType = gasTypes.find((type) => type.id === product.gasTypeId);
+  const gasName = gasType ? gasType.name : "Unknown";
 
   return (
     <Card
@@ -99,7 +105,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           }}
         >
           <span>Gas Name</span>
-          <span>{product.gasName}</span>
+          <span>{gasName}</span>
         </Typography>
         <Typography
           style={{
@@ -109,7 +115,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
             justifyContent: "space-between",
           }}
         >
-          <span>Gas size</span>
+          <span>Gas Size</span>
           <span>{product.gasSize}</span>
         </Typography>
         <Typography

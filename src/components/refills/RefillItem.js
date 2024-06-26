@@ -9,9 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useProducts } from "../products/ProductContext";
 
-function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
+function RefillItem({ index, refill, onView, onEdit, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { products } = useProducts();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,7 +24,8 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
   };
 
   // Check if product and product.price are defined
-  const totalPrice = product && product.price ? refill.quantity * product.price : 0;
+  const product = products.find((p) => p.id === refill.productId);
+  const totalPrice = product ? refill.quantity * product.sellingPrice : 0;
 
   return (
     <Card
@@ -140,7 +143,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Gas Type</span>
-          <span>{refill.gasType}</span>
+          <span>{product ? product.gasName : "N/A"}</span>
         </Typography>
 
         <Typography
@@ -152,7 +155,7 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
           }}
         >
           <span>Gas Size</span>
-          <span>{refill.gasSize}</span>
+          <span>{product ? product.gasSize : "N/A"}</span>
         </Typography>
 
         <Typography
@@ -182,6 +185,6 @@ function RefillItem({ index, refill, product, onView, onEdit, onDelete }) {
       </CardContent>
     </Card>
   );
-};
+}
 
 export default RefillItem;

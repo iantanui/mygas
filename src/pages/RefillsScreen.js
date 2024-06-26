@@ -14,16 +14,16 @@ const Refills = () => {
     phoneNumber,
     gasType,
     gasSize,
-    quantity
+    quantity,
+    productId
   ) => {
     if (currentRefill) {
       updateRefill(
         currentRefill.id,
         customerName,
         phoneNumber,
-        gasType,
-        gasSize,
-        quantity
+        quantity,
+        productId
       );
     } else {
       addRefill(customerName, phoneNumber, gasType, gasSize, quantity);
