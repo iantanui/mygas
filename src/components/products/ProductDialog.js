@@ -15,6 +15,7 @@ import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function ProductDialog({ open, onClose, onSave, product }) {
   const { gasTypes } = useGasTypes();
+
   const [quantity, setQuantity] = useState("");
   const [sellingPrice, setSellingPrice] = useState("");
   const [selectedGasName, setSelectedGasName] = useState("");
@@ -22,15 +23,15 @@ function ProductDialog({ open, onClose, onSave, product }) {
 
   useEffect(() => {
     if (product) {
-      setQuantity(product.quantity);
-      setSellingPrice(product.sellingPrice);
-      setSelectedGasName(product.gasName);
+      setSelectedGasName(product.name);
       setSelectedGasSize(product.gasSize);
+      setQuantity(product.quantity.toString());
+      setSellingPrice(product.sellingPrice.toString());
     } else {
-      setQuantity("");
-      setSellingPrice("");
       setSelectedGasName("");
       setSelectedGasSize("");
+      setQuantity("");
+      setSellingPrice("");
     }
   }, [product]);
 
@@ -40,14 +41,15 @@ function ProductDialog({ open, onClose, onSave, product }) {
         selectedGasName,
         selectedGasSize,
         parseInt(quantity),
-        sellingPrice
+        parseFloat(sellingPrice)
       );
       setSelectedGasName("");
+      setSelectedGasSize("");
       setQuantity("");
       setSellingPrice("");
-      setSelectedGasSize("");
     } else {
       // error
+      console.log("Please fill all fields");
     }
   };
 

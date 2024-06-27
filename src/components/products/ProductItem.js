@@ -9,11 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useGasTypes } from "../gasTypes/GasTypeContext";
 
 function ProductItem({ index, product, onEdit, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { gasTypes } = useGasTypes(); // Access gas types context
+
+  console.log("Product Item Props:", product);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,8 +24,7 @@ function ProductItem({ index, product, onEdit, onDelete }) {
   };
 
   // Find the gas name from gasTypes using the product.gasTypeId
-  const gasType = gasTypes.find((type) => type.id === product.gasTypeId);
-  const gasName = gasType ? gasType.name : "Unknown";
+
 
   return (
     <Card
@@ -105,8 +104,9 @@ function ProductItem({ index, product, onEdit, onDelete }) {
           }}
         >
           <span>Gas Name</span>
-          <span>{gasName}</span>
+          <span>{product.gasName}</span>
         </Typography>
+        
         <Typography
           style={{
             padding: "8px",
